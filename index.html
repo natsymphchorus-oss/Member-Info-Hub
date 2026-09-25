@@ -560,7 +560,7 @@
 
   async function loadManagerNotes() {
     try {
-      const response = await fetch('https://nch-manager-notes.rtephilschedule.workers.dev');
+      const response = await fetch('https://nch-manager-notes.natsymphchorus.workers.dev');
       if (response.ok) {
         const data = await response.json();
         if (data.content) {
