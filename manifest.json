@@ -1,0 +1,15 @@
+{
+  "name": "NSC Info",
+  "short_name": "NSC Info",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#1a73e8",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "447x447",
+      "type": "image/png"
+    }
+  ]
+}
