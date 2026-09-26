@@ -96,8 +96,9 @@
     .card-app-install { background-color: #e8f5f4; border-color: #1d5c5a; }
     .card-app-install h3 { color: #1d5c5a; }
 
-    .card-performances { background-color: #eff6ff; border-color: #3b82f6; }
-    .card-performances h3 { color: #1d4ed8; }
+    /* Green Theme for Previous Performances Container */
+    .card-performances { background-color: #f0fdf4; border-color: #22c55e; }
+    .card-performances h3 { color: #15803d; }
 
     .card-archive-detail { background-color: #f0fdf4; border-color: #16a34a; }
     .card-archive-detail h3 { color: #166534; }
@@ -127,7 +128,7 @@
     .nav-btn-archive { background-color: #455a64; }
     .btn-large { font-size: 15px; font-weight: bold; }
 
-    /* Bottom Functional Toggle Buttons */
+    /* Bottom Functional Toggle Buttons (Medium Grey with clear borders) */
     .bottom-nav {
       display: flex;
       gap: 10px;
@@ -139,21 +140,21 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #333;
+      color: #ffffff;
       text-align: center;
       padding: 12px 10px;
       border-radius: 8px;
-      border: 1px solid #b0bec5;
-      background-color: #eceff1;
+      border: 1px solid #64748b;
+      background-color: #64748b;
       cursor: pointer;
       font-weight: bold;
       line-height: 1.2;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       font-family: Arial, sans-serif;
     }
-    .bottom-nav-btn:hover { background-color: #cfd8dc; }
+    .bottom-nav-btn:hover { background-color: #475569; }
 
-    /* Bottom Full-Width Toggle Button matching hierarchy scale */
+    /* Bottom Full-Width Toggle Button (Subtle, less glaring green) */
     .bottom-nav-full {
       margin-bottom: 20px;
     }
@@ -167,15 +168,15 @@
       text-align: center;
       padding: 14px 10px;
       border-radius: 8px;
-      border: 1px solid #3b82f6;
-      background-color: #3b82f6; /* Lighter shade than primary #2563eb */
+      border: 1px solid #16a34a;
+      background-color: #22c55e;
       cursor: pointer;
       font-weight: bold;
       line-height: 1.2;
-      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
       font-family: Arial, sans-serif;
     }
-    .bottom-nav-full-btn:hover { background-color: #2563eb; }
+    .bottom-nav-full-btn:hover { background-color: #16a34a; }
 
     .load-more-btn, .reduce-btn {
       display: block;
@@ -214,13 +215,13 @@
     }
     .sub-btn-alt { background-color: #1d5c5a; }
 
-    /* Buttons for the 4 works (Medium-light blue / ~66% brightness feel) */
+    /* Buttons for the 4 works (Medium green / ~66% brightness feel) */
     .perf-btn {
       display: block;
       width: 100%;
       box-sizing: border-box;
-      background-color: #60a5fa;
-      color: white;
+      background-color: #4ade80;
+      color: #14532d;
       text-align: center;
       padding: 12px;
       border-radius: 6px;
@@ -231,22 +232,23 @@
       border: none;
       cursor: pointer;
       font-family: Arial, sans-serif;
-      box-shadow: 0 1px 3px rgba(96, 165, 250, 0.2);
+      box-shadow: 0 1px 3px rgba(74, 222, 128, 0.2);
     }
     .perf-btn:first-of-type {
       margin-top: 0;
     }
     .perf-btn:hover {
-      background-color: #3b82f6;
+      background-color: #22c55e;
+      color: #ffffff;
     }
 
-    /* Sub-performances buttons (Even lighter blue, stepping down importance) */
+    /* Sub-performances buttons (Lighter green, stepping down importance) */
     .sub-perf-btn {
       display: block;
       width: 100%;
       box-sizing: border-box;
-      background-color: #93c5fd;
-      color: #1e3a8a;
+      background-color: #bbf7d0;
+      color: #166534;
       text-align: center;
       padding: 10px;
       border-radius: 6px;
@@ -259,8 +261,8 @@
       font-family: Arial, sans-serif;
     }
     .sub-perf-btn:hover {
-      background-color: #60a5fa;
-      color: #ffffff;
+      background-color: #4ade80;
+      color: #14532d;
     }
 
     .parking-banner {
@@ -346,7 +348,7 @@
   <div class="bottom-nav-full">
     <button onclick="toggleSection('performances-section')" class="bottom-nav-full-btn">
       <span class="btn-large">Previous NSCI Performances</span>
-      <span class="btn-large">Of This Year's Works</span>
+      <span class="btn-large">of Works in 2026/27 Season</span>
     </button>
   </div>
 
@@ -389,9 +391,9 @@
     </div>
   </div>
 
-  <!-- Collapsible: Previous NSCI Performances Of This Year's Works -->
+  <!-- Collapsible: Previous NSCI Performances of Works in 2026/27 Season -->
   <div id="performances-section" class="card card-performances" style="display: none;">
-    <h3>Previous NSCI Performances of This Year's Works</h3>
+    <h3>Previous NSCI Performances of Works in 2026/27 Season</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px; margin-bottom: 12px;">Select a work below to view its previous performance archive:</p>
       
@@ -400,7 +402,7 @@
         Britten: War Requiem
       </button>
       <div id="war-requiem-sub" style="display: none; background: #f8fafc; padding: 10px; border-radius: 6px; margin-top: 8px; border: 1px solid #cbd5e1;">
-        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1e3a8a;">Select performance date:</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #15803d;">Select performance date:</p>
         <button onclick="showPerformanceDetail('war-requiem-1986')" class="sub-perf-btn">27 June 1986</button>
         <button onclick="showPerformanceDetail('war-requiem-2002')" class="sub-perf-btn">1 March 2002</button>
         <button onclick="showPerformanceDetail('war-requiem-2018')" class="sub-perf-btn">9 November 2018</button>
@@ -411,7 +413,7 @@
         Bach: St Matthew Passion
       </button>
       <div id="bach-sub" style="display: none; background: #f8fafc; padding: 10px; border-radius: 6px; margin-top: 8px; border: 1px solid #cbd5e1;">
-        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1e3a8a;">Select performance date:</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #15803d;">Select performance date:</p>
         <button onclick="showPerformanceDetail('bach-2015')" class="sub-perf-btn">3 April 2015</button>
         <button onclick="showPerformanceDetail('bach-2017')" class="sub-perf-btn">14 April 2017</button>
         <button onclick="showPerformanceDetail('bach-2019')" class="sub-perf-btn">19 April 2019</button>
@@ -423,7 +425,7 @@
         Holst: The Planets
       </button>
       <div id="holst-sub" style="display: none; background: #f8fafc; padding: 10px; border-radius: 6px; margin-top: 8px; border: 1px solid #cbd5e1;">
-        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1e3a8a;">Select performance date:</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #15803d;">Select performance date:</p>
         <button onclick="showPerformanceDetail('holst-2018')" class="sub-perf-btn">28 September 2018</button>
       </div>
 
@@ -432,7 +434,7 @@
         Berlioz: Damnation of Faust
       </button>
       <div id="berlioz-sub" style="display: none; background: #f8fafc; padding: 10px; border-radius: 6px; margin-top: 8px; border: 1px solid #cbd5e1;">
-        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1e3a8a;">Select performance date:</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #15803d;">Select performance date:</p>
         <button onclick="showPerformanceDetail('berlioz-2003')" class="sub-perf-btn">5 December 2003</button>
       </div>
     </div>
@@ -599,6 +601,12 @@
   }
 
   function toggleWorkSubMenu(subId) {
+    // Automatically close any open detail cards when switching works
+    const allDetailCards = document.querySelectorAll('.detail-card');
+    allDetailCards.forEach(card => {
+      card.style.display = 'none';
+    });
+
     const subMenus = ['war-requiem-sub', 'bach-sub', 'holst-sub', 'berlioz-sub'];
     subMenus.forEach(id => {
       const el = document.getElementById(id);
