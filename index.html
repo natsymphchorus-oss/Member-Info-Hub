@@ -299,7 +299,7 @@
 
 <script>
   const WORKER_URL = 'https://nsc-calendar-proxy.natsymphchorus.workers.dev/';
-  const DIRECTOR_TIMESTAMP_URL = 'https://script.google.com/macros/s/AKfycby_r7DyJXb-SLQ_m9QdDou6f82ItVjomCcPnkjnO6tY40VDYM5rto8lxzra01v2V7ft/exec';
+  const DIRECTOR_NOTES_WORKER = 'https://nsc-choral-director-notes.natsymphchorus.workers.dev';
 
   let cachedEvents = [];
   let showAllFuture = false;
@@ -327,7 +327,7 @@
       }
 
       renderEvents();
-      loadDirectorTimestamp();
+      loadDirectorNotes();
       loadManagerNotes();
 
     } catch (err) {
@@ -406,11 +406,11 @@
         <h3>Notes from Choral Director</h3>
         <div class="card-inner">
           <p id="director-timestamp" style="font-size: 13px; color: #d32f2f; margin-top: 0; margin-bottom: 8px; font-weight: bold;">Last Updated: Loading...</p>
-          <div style="position: relative; overflow: hidden; height: 440px; border: 1px solid #ccc; background: #fff; border-radius: 4px; margin-bottom: 8px;">
-            <iframe src="https://docs.google.com/document/d/1I0RQCXjLia9nEP-U39uelH3od1dtulzzGy_pyi_fiPw/preview" style="position: absolute; top: -40px; left: 0; width: 100%; height: calc(100% + 40px); border: none;"></iframe>
+          <div id="director-content" style="font-size: 16px; margin-bottom: 12px; max-height: 440px; overflow-y: auto; border: 1px solid #ccc; background: #fff; padding: 10px; border-radius: 4px;">
+            <em>No notes currently available.</em>
           </div>
           <div style="text-align: right; margin-top: 5px;">
-            <a href="https://docs.google.com/document/d/1I0RQCXjLia9nEP-U39uelH3od1dtulzzGy_pyi_fiPw/view" target="_blank" style="color: #15803d; font-weight: bold; font-size: 14px; text-decoration: none;">Open as separate printable file</a>
+            <a href="javascript:void(0);" onclick="openDirectorPrintView()" style="color: #15803d; font-weight: bold; font-size: 14px; text-decoration: none;">Open as separate printable file</a>
           </div>
         </div>
       </div>
@@ -481,7 +481,7 @@
   function showAllEvents() {
     showAllFuture = true;
     renderEvents();
-    loadDirectorTimestamp();
+    loadDirectorNotes();
     loadManagerNotes();
     window.scrollBy({ top: 300, behavior: 'smooth' });
   }
@@ -489,7 +489,7 @@
   function reduceEvents() {
     showAllFuture = false;
     renderEvents();
-    loadDirectorTimestamp();
+    loadDirectorNotes();
     loadManagerNotes();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -507,11 +507,11 @@
         <h3>Notes from Choral Director</h3>
         <div class="card-inner">
           <p id="director-timestamp" style="font-size: 13px; color: #d32f2f; margin-top: 0; margin-bottom: 8px; font-weight: bold;">Last Updated: Loading...</p>
-          <div style="position: relative; overflow: hidden; height: 440px; border: 1px solid #ccc; background: #fff; border-radius: 4px; margin-bottom: 8px;">
-            <iframe src="https://docs.google.com/document/d/1I0RQCXjLia9nEP-U39uelH3od1dtulzzGy_pyi_fiPw/preview" style="position: absolute; top: -40px; left: 0; width: 100%; height: calc(100% + 40px); border: none;"></iframe>
+          <div id="director-content" style="font-size: 16px; margin-bottom: 12px; max-height: 440px; overflow-y: auto; border: 1px solid #ccc; background: #fff; padding: 10px; border-radius: 4px;">
+            <em>No notes currently available.</em>
           </div>
           <div style="text-align: right; margin-top: 5px;">
-            <a href="https://docs.google.com/document/d/1I0RQCXjLia9nEP-U39uelH3od1dtulzzGy_pyi_fiPw/view" target="_blank" style="color: #15803d; font-weight: bold; font-size: 14px; text-decoration: none;">Open as separate printable file</a>
+            <a href="javascript:void(0);" onclick="openDirectorPrintView()" style="color: #15803d; font-weight: bold; font-size: 14px; text-decoration: none;">Open as separate printable file</a>
           </div>
         </div>
       </div>
@@ -531,27 +531,31 @@
     `;
 
     document.getElementById('events-container').innerHTML = fallbackHTML;
-    loadDirectorTimestamp();
+    loadDirectorNotes();
     loadManagerNotes();
   }
 
   loadDynamicEvents();
 
-  async function loadDirectorTimestamp() {
+  async function loadDirectorNotes() {
     try {
-      const response = await fetch(DIRECTOR_TIMESTAMP_URL);
+      const response = await fetch(DIRECTOR_NOTES_WORKER);
       if (response.ok) {
         const data = await response.json();
+        if (data.content) {
+          const contentEl = document.getElementById('director-content');
+          if (contentEl) contentEl.innerHTML = data.content;
+        }
         if (data.modifiedTime) {
           const dateObj = new Date(data.modifiedTime);
           const formattedDate = dateObj.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
           const formattedTime = dateObj.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-          const el = document.getElementById('director-timestamp');
-          if (el) el.innerText = `Last Updated: ${formattedTime} on ${formattedDate}`;
+          const timeEl = document.getElementById('director-timestamp');
+          if (timeEl) timeEl.innerText = `Last Updated: ${formattedTime} on ${formattedDate}`;
         }
       }
     } catch (e) {
-      console.error('Failed to load director timestamp', e);
+      console.error('Failed to load director notes', e);
       const el = document.getElementById('director-timestamp');
       if (el) el.innerText = 'Last Updated: Unavailable';
     }
@@ -577,6 +581,41 @@
     } catch (e) {
       console.error('Failed to load manager notes', e);
     }
+  }
+
+  function openDirectorPrintView() {
+    const contentEl = document.getElementById('director-content');
+    const timeEl = document.getElementById('director-timestamp');
+    const contentHTML = contentEl ? contentEl.innerHTML : '';
+    const timestampText = timeEl ? timeEl.innerText : '';
+
+    const printPageHTML = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Notes from Choral Director - Printable View</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 20px; color: #222; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+          h2 { color: #15803d; border-bottom: 2px solid #15803d; padding-bottom: 8px; margin-top: 0; }
+          .timestamp { font-size: 14px; color: #d32f2f; margin-bottom: 20px; font-style: italic; font-weight: bold; }
+          .print-btn { background: #15803d; color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-bottom: 30px; }
+          @media print { .print-btn { display: none; } }
+        </style>
+      </head>
+      <body>
+        <button class="print-btn" onclick="window.print()">Print This Page</button>
+        <h2>Notes from Choral Director</h2>
+        <div class="timestamp">${timestampText}</div>
+        <div style="font-size: 16px;">${contentHTML}</div>
+      </body>
+      </html>
+    `;
+
+    const blob = new Blob([printPageHTML], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    window.open(blobUrl, '_blank');
   }
 
   function openManagerPrintView() {
