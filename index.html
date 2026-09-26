@@ -96,6 +96,9 @@
     .card-app-install { background-color: #e8f5f4; border-color: #1d5c5a; }
     .card-app-install h3 { color: #1d5c5a; }
 
+    .card-performances { background-color: #fffbeb; border-color: #d97706; }
+    .card-performances h3 { color: #b45309; }
+
     /* Top External Navigation Buttons */
     .top-nav {
       display: flex;
@@ -147,6 +150,30 @@
     }
     .bottom-nav-btn:hover { background-color: #cfd8dc; }
 
+    /* Single full-width toggle button for Performances */
+    .bottom-nav-full {
+      margin-bottom: 20px;
+    }
+    .bottom-nav-full-btn {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 8px;
+      border: 1px solid #b45309;
+      background-color: #d97706;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1.2;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-family: Arial, sans-serif;
+    }
+    .bottom-nav-full-btn:hover { background-color: #b45309; }
+
     .load-more-btn, .reduce-btn {
       display: block;
       width: 100%;
@@ -183,6 +210,31 @@
       font-family: Arial, sans-serif;
     }
     .sub-btn-alt { background-color: #1d5c5a; }
+
+    /* Buttons inside the Performances card */
+    .perf-btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #b45309;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+    .perf-btn:first-of-type {
+      margin-top: 0;
+    }
+    .perf-btn:hover {
+      background-color: #92400e;
+    }
 
     .parking-banner {
       background: #f8f9fa;
@@ -263,6 +315,14 @@
     </button>
   </div>
 
+  <!-- Additional Bottom Full-Width Button -->
+  <div class="bottom-nav-full">
+    <button onclick="toggleSection('performances-section')" class="bottom-nav-full-btn">
+      <span class="btn-large">Previous Performances</span>
+      <span class="btn-large">Of This Year's Works</span>
+    </button>
+  </div>
+
   <!-- Collapsible: Subscribe to Choir Calendar -->
   <div id="subscribe-section" class="card card-subscribe" style="display: none;">
     <h3>Subscribe to Choir Calendar</h3>
@@ -302,6 +362,28 @@
     </div>
   </div>
 
+  <!-- Collapsible: Previous Performances Of This Year's Works -->
+  <div id="performances-section" class="card card-performances" style="display: none;">
+    <h3>Previous Performances Of This Year's Works</h3>
+    <div class="card-inner">
+      <p style="margin-top: 0; font-size: 14px; margin-bottom: 12px;">Select a work below to view its previous performance archive:</p>
+      
+      <!-- Manually configured archive links for 2026/27 works -->
+      <a href="https://sites.google.com/view/nsc-new-archive/home" target="_blank" class="perf-btn">
+        Britten: War Requiem
+      </a>
+      <a href="https://sites.google.com/view/nsc-new-archive/home" target="_blank" class="perf-btn">
+        Bach: St Matthew Passion
+      </a>
+      <a href="https://sites.google.com/view/nsc-new-archive/home" target="_blank" class="perf-btn">
+        Holst: The Planets
+      </a>
+      <a href="https://sites.google.com/view/nsc-new-archive/home" target="_blank" class="perf-btn">
+        Berlioz: Damnation of Faust
+      </a>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -315,23 +397,23 @@
   function toggleSection(sectionId) {
     const subscribeSection = document.getElementById('subscribe-section');
     const installSection = document.getElementById('install-section');
+    const performancesSection = document.getElementById('performances-section');
 
-    if (sectionId === 'subscribe-section') {
-      if (subscribeSection.style.display === 'none') {
-        subscribeSection.style.display = 'block';
-        installSection.style.display = 'none';
-        subscribeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        subscribeSection.style.display = 'none';
-      }
-    } else if (sectionId === 'install-section') {
-      if (installSection.style.display === 'none') {
-        installSection.style.display = 'block';
-        subscribeSection.style.display = 'none';
-        installSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        installSection.style.display = 'none';
-      }
+    // Hide all collapsible cards first
+    subscribeSection.style.display = 'none';
+    installSection.style.display = 'none';
+    performancesSection.style.display = 'none';
+
+    // If the clicked section was previously hidden, show it now (mutually exclusive)
+    if (sectionId === 'subscribe-section' && subscribeSection.style.display === 'none') {
+      subscribeSection.style.display = 'block';
+      subscribeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else if (sectionId === 'install-section' && installSection.style.display === 'none') {
+      installSection.style.display = 'block';
+      installSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else if (sectionId === 'performances-section' && performancesSection.style.display === 'none') {
+      performancesSection.style.display = 'block';
+      performancesSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 
@@ -716,7 +798,7 @@
 
           <h3>Step-by-Step Instructions:</h3>
           <ul>
-            <li><strong>iPhone / iPad (Apple Calendar):</strong> Open device <em>Settings &gt; Calendar &gt; Accounts &gt; Add Account &gt; Other &gt; Add Subscribed Calendar</em>, then paste the link into the Server field and save.</li>
+            <li><strong>iPhone / iPad (Apple Calendar):</strong> Open device <em>Settings &gt; Calendar &gt; Accounts &gt; Add Account &gt; Other &gt; Add Subscribed Card</em>, then paste the link into the Server field and save.</li>
             <li><strong>Outlook (Desktop / Web):</strong> Open Outlook Calendar, click <em>Add calendar &gt; Subscribe from web</em>, paste the link, name the calendar, and save.</li>
           </ul>
 
@@ -728,7 +810,7 @@
       </html>
     `;
 
-    const blob = new Blob([instructionsHTML], { type: 'text/html' >> 0 });
+    const blob = new Blob([instructionsHTML], { type: 'text/html' });
     const blobUrl = URL.createObjectURL(blob);
     window.open(blobUrl, '_blank');
   }
