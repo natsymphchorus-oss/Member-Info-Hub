@@ -153,7 +153,7 @@
     }
     .bottom-nav-btn:hover { background-color: #cfd8dc; }
 
-    /* Bottom Full-Width Toggle Button matching blue theme */
+    /* Bottom Full-Width Toggle Button matching hierarchy scale */
     .bottom-nav-full {
       margin-bottom: 20px;
     }
@@ -167,15 +167,15 @@
       text-align: center;
       padding: 14px 10px;
       border-radius: 8px;
-      border: 1px solid #1d4ed8;
-      background-color: #2563eb;
+      border: 1px solid #3b82f6;
+      background-color: #3b82f6; /* Lighter shade than primary #2563eb */
       cursor: pointer;
       font-weight: bold;
       line-height: 1.2;
-      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
       font-family: Arial, sans-serif;
     }
-    .bottom-nav-full-btn:hover { background-color: #1d4ed8; }
+    .bottom-nav-full-btn:hover { background-color: #2563eb; }
 
     .load-more-btn, .reduce-btn {
       display: block;
@@ -214,12 +214,12 @@
     }
     .sub-btn-alt { background-color: #1d5c5a; }
 
-    /* Buttons inside the Performances card matching blue theme */
+    /* Buttons for the 4 works (Medium-light blue / ~66% brightness feel) */
     .perf-btn {
       display: block;
       width: 100%;
       box-sizing: border-box;
-      background-color: #2563eb;
+      background-color: #60a5fa;
       color: white;
       text-align: center;
       padding: 12px;
@@ -231,22 +231,22 @@
       border: none;
       cursor: pointer;
       font-family: Arial, sans-serif;
-      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+      box-shadow: 0 1px 3px rgba(96, 165, 250, 0.2);
     }
     .perf-btn:first-of-type {
       margin-top: 0;
     }
     .perf-btn:hover {
-      background-color: #1d4ed8;
+      background-color: #3b82f6;
     }
 
-    /* Sub-performances buttons */
+    /* Sub-performances buttons (Even lighter blue, stepping down importance) */
     .sub-perf-btn {
       display: block;
       width: 100%;
       box-sizing: border-box;
-      background-color: #1d4ed8;
-      color: white;
+      background-color: #93c5fd;
+      color: #1e3a8a;
       text-align: center;
       padding: 10px;
       border-radius: 6px;
@@ -259,7 +259,8 @@
       font-family: Arial, sans-serif;
     }
     .sub-perf-btn:hover {
-      background-color: #1e40af;
+      background-color: #60a5fa;
+      color: #ffffff;
     }
 
     .parking-banner {
@@ -344,7 +345,7 @@
   <!-- Additional Bottom Full-Width Button -->
   <div class="bottom-nav-full">
     <button onclick="toggleSection('performances-section')" class="bottom-nav-full-btn">
-      <span class="btn-large">Previous Performances</span>
+      <span class="btn-large">Previous NSCI Performances</span>
       <span class="btn-large">Of This Year's Works</span>
     </button>
   </div>
@@ -388,9 +389,9 @@
     </div>
   </div>
 
-  <!-- Collapsible: Previous Performances Of This Year's Works -->
+  <!-- Collapsible: Previous NSCI Performances Of This Year's Works -->
   <div id="performances-section" class="card card-performances" style="display: none;">
-    <h3>Previous Performances Of This Year's Works</h3>
+    <h3>Previous NSCI Performances of This Year's Works</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px; margin-bottom: 12px;">Select a work below to view its previous performance archive:</p>
       
@@ -440,7 +441,7 @@
   <!-- ================= ARCHIVE DETAIL CARDS ================= -->
 
   <!-- 1. War Requiem - 27 June 1986 -->
-  <div id="war-requiem-1986" class="card card-archive-detail" style="display: none;">
+  <div id="war-requiem-1986" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Britten: War Requiem (27 June 1986)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> St Patrick's Cathedral, Dublin</p>
@@ -454,7 +455,7 @@
   </div>
 
   <!-- 2. War Requiem - 1 March 2002 -->
-  <div id="war-requiem-2002" class="card card-archive-detail" style="display: none;">
+  <div id="war-requiem-2002" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Britten: War Requiem (1 March 2002)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> St Patrick's Cathedral, Dublin</p>
@@ -468,7 +469,7 @@
   </div>
 
   <!-- 3. War Requiem - 9 November 2018 -->
-  <div id="war-requiem-2018" class="card card-archive-detail" style="display: none;">
+  <div id="war-requiem-2018" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Britten: War Requiem (9 November 2018)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -482,7 +483,7 @@
   </div>
 
   <!-- 4. Bach: St Matthew Passion - 3 April 2015 -->
-  <div id="bach-2015" class="card card-archive-detail" style="display: none;">
+  <div id="bach-2015" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Bach: St Matthew Passion (3 April 2015)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -496,7 +497,7 @@
   </div>
 
   <!-- 5. Bach: St Matthew Passion - 14 April 2017 -->
-  <div id="bach-2017" class="card card-archive-detail" style="display: none;">
+  <div id="bach-2017" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Bach: St Matthew Passion (14 April 2017)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -510,7 +511,7 @@
   </div>
 
   <!-- 6. Bach: St Matthew Passion - 19 April 2019 -->
-  <div id="bach-2019" class="card card-archive-detail" style="display: none;">
+  <div id="bach-2019" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Bach: St Matthew Passion (19 April 2019)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -524,7 +525,7 @@
   </div>
 
   <!-- 7. Bach: St Matthew Passion - 29 March 2024 -->
-  <div id="bach-2024" class="card card-archive-detail" style="display: none;">
+  <div id="bach-2024" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Bach: St Matthew Passion (29 March 2024)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -538,7 +539,7 @@
   </div>
 
   <!-- 8. Holst: The Planets - 28 September 2018 -->
-  <div id="holst-2018" class="card card-archive-detail" style="display: none;">
+  <div id="holst-2018" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Holst: The Planets (28 September 2018)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -552,7 +553,7 @@
   </div>
 
   <!-- 9. Berlioz: Damnation of Faust - 5 December 2003 -->
-  <div id="berlioz-2003" class="card card-archive-detail" style="display: none;">
+  <div id="berlioz-2003" class="card card-archive-detail detail-card" style="display: none;">
     <h3>Berlioz: La Damnation de Faust, Op.24 (5 December 2003)</h3>
     <div class="card-inner">
       <p style="margin-top: 0; font-size: 14px;"><strong>Venue:</strong> National Concert Hall, Dublin</p>
@@ -571,7 +572,7 @@
   const WORKER_URL = 'https://nsc-calendar-proxy.natsymphchorus.workers.dev/';
   const DIRECTOR_NOTES_WORKER = 'https://nsc-choral-director-notes.natsymphchorus.workers.dev';
   const MANAGER_NOTES_WORKER = 'https://nch-manager-notes.natsymphchorus.workers.dev';
-  const PROGRAM_NOTE_WORKER = 'https://retrieve-program-note.natsymphchorus.workers.dev'; // Generic worker endpoint
+  const PROGRAM_NOTE_WORKER = 'https://retrieve-program-note.natsymphchorus.workers.dev';
 
   let cachedEvents = [];
   let showAllFuture = false;
@@ -581,12 +582,10 @@
     const installSection = document.getElementById('install-section');
     const performancesSection = document.getElementById('performances-section');
 
-    // Hide all main collapsible cards first
     subscribeSection.style.display = 'none';
     installSection.style.display = 'none';
     performancesSection.style.display = 'none';
 
-    // If the clicked section was previously hidden, show it now
     if (sectionId === 'subscribe-section' && subscribeSection.style.display === 'none') {
       subscribeSection.style.display = 'block';
       subscribeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -612,6 +611,12 @@
   }
 
   function showPerformanceDetail(detailId) {
+    // Automatically close all other detail cards first for mutual exclusivity
+    const allDetailCards = document.querySelectorAll('.detail-card');
+    allDetailCards.forEach(card => {
+      card.style.display = 'none';
+    });
+
     const detailCard = document.getElementById(detailId);
     if (detailCard) {
       detailCard.style.display = 'block';
@@ -705,7 +710,6 @@
 
     let fullHTML = '';
 
-    // --- 1. First Forthcoming Rehearsal ---
     if (targetDates.length > 0) {
       const dateKey = targetDates[0];
       const dayEvents = dateMap.get(dateKey);
@@ -733,7 +737,6 @@
       `;
     }
 
-    // --- 2. Notes from Chorus Director ---
     fullHTML += `
       <div class="card card-director">
         <h3>Notes from Chorus Director</h3>
@@ -749,7 +752,6 @@
       </div>
     `;
 
-    // --- 3. Notes from Choir Manager ---
     fullHTML += `
       <div class="card card-manager">
         <h3>Notes from Choir Manager</h3>
@@ -765,7 +767,6 @@
       </div>
     `;
 
-    // --- 4. Remaining Future Events ---
     for (let i = 1; i < targetDates.length; i++) {
       const dateKey = targetDates[i];
       const dayEvents = dateMap.get(dateKey);
