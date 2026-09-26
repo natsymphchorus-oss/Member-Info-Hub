@@ -68,7 +68,6 @@
     }
 
     /* Hierarchy-Based Theming (Adjusted Loudness) */
-    /* 1. Next Forthcoming Rehearsal (100% - matching title prominence) */
     .card-event-1 { 
       background-color: #dbeafe; 
       border-color: #1d4ed8; 
@@ -76,14 +75,12 @@
     } 
     .card-event-1 h3 { color: #1e3a8a; }
 
-    /* 2. Notes from Chorus Director (75% prominence) */
     .card-director { 
       background-color: #dcfce7; 
       border-color: #22c55e; 
     } 
     .card-director h3 { color: #15803d; }
 
-    /* 3. Notes from Choir Manager (50% prominence) */
     .card-manager { 
       background-color: #f3e8ff; 
       border-color: #c084fc; 
@@ -211,7 +208,7 @@
       border-left-width: 4px;
     }
 
-    /* Director Notes Content Styling */
+    /* Director Notes Content Styling with Responsive Tables */
     #director-content {
       font-size: 16px; 
       margin-bottom: 12px; 
@@ -221,6 +218,17 @@
       background: #fff; 
       padding: 10px; 
       border-radius: 4px;
+    }
+    #director-content table {
+      width: 100% !important;
+      max-width: 100% !important;
+      table-layout: fixed;
+      box-sizing: border-box;
+    }
+    #director-content td, #director-content th {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      padding: 6px !important;
     }
   </style>
 </head>
